@@ -10,6 +10,7 @@ import axios from 'axios';
 
 class App extends Component {
 
+  // STATE OBJECT
   state = {
 
     users: [],
@@ -23,11 +24,10 @@ class App extends Component {
     // to update state we use setState
     this.setState({laoding: true});
     
-    // "get request" return promise, ".then" to catch promise. Axios fetching data
+    // "get request" return promise, ".then" to catch promise. Axios fetching data.
     // await keyword is used to not to wait for the api result and run the other code. 
     const res = await  axios.get('https://api.github.com/users')
     this.setState({ users: res.data , laoding: false });
-
   }
 
 

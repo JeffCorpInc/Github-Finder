@@ -1,28 +1,44 @@
 // here we will fetch the github user data and show them
 
-import React, { Component } from 'react'
+import React from 'react'
 import UserData from './UserData';
+import Spinner from '../Layouts/spinner';
+import PropTypes  from 'prop-types';
 
 
 
-export default class Users extends Component {
+const Users = ({users , laoding}) => {
 
-    render() {
-    
+  // check if "loading or not" and return "spinner or userItems"
+  if (laoding) {
+
+    return <Spinner />
+  }
+  
+  else {
+
     return (
-        
+   
       <div className='userDataStyle'>
-
-        {this.props.users.map( user => (
-
+  
+        {users.map( user => (
+  
                 // unique key to identify which user should display
                 <UserData key={user.id} user={user} />
-
+  
             )
           )
         }
-
+  
       </div>
     )
   }
-};
+}
+
+Users.propTypes = {
+  
+  users: PropTypes.array.isRequired,
+  laoding: PropTypes.bool.isRequired,
+}
+
+export default Users

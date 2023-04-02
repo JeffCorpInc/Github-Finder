@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 
 // we refactored UserData component. We dont need render method or (this.) to call in functional components
-// "Destructuring" me hame ksi object ki key values ko save karlete hein
+// "Destructuring" me hame ksi object ki key values ko save karlete hein.
 const UserData = ({user:{ avatar_url, html_url, login }}) => {
 
     return (
@@ -18,7 +18,6 @@ const UserData = ({user:{ avatar_url, html_url, login }}) => {
 
       </div>
     )
-
 }
 
 // Type checking active, user is required 
