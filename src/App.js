@@ -3,10 +3,9 @@
 import './App.css';
 import React,{Component} from 'react';
 import Navbar from './components/Layouts/Navbar';
+import Search from './components/Users/search';
 import Users from './components/Users/Users';
 import axios from 'axios';
-// import dotenv from 'dotenv'
-
 
 
 class App extends Component {
@@ -40,6 +39,7 @@ class App extends Component {
       <div className='App'>
           <Navbar />
           <div>
+            <Search />
             {/* hamne state me se objects lekr "users" me call karliya using "props"  */}
             <Users laoding={this.state.laoding} users={this.state.users} />
           </div>
