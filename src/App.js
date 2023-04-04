@@ -5,6 +5,7 @@ import React,{Component} from 'react';
 import Navbar from './components/Layouts/Navbar';
 import Users from './components/Users/Users';
 import axios from 'axios';
+// import dotenv from 'dotenv'
 
 
 
@@ -26,14 +27,14 @@ class App extends Component {
     
     // "get request" return promise, ".then" to catch promise. Axios fetching data.
     // await keyword is used to not to wait for the api result and run the other code. 
-    const res = await  axios.get('https://api.github.com/users')
+    const res = await  axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
     this.setState({ users: res.data , laoding: false });
   }
 
 
   // render is a method used to write HTML code inside it. It's a lCE 
   render(){
-    
+
     return(
       
       <div className='App'>
