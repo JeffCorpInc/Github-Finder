@@ -13,8 +13,7 @@ const Navbar = (props) => {
     <nav className='navbar'>
 
       <h1>
-        <i className={props.icon}></i>
-        {props.title}
+        <i className={props.icon}></i> {props.title}
       </h1>
 
     </nav>
