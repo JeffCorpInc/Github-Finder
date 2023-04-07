@@ -4,16 +4,18 @@ import './App.css';
 import React,{Component} from 'react';
 import Alert from './components/Layouts/Alert';
 import Navbar from './components/Layouts/Navbar';
+import NavBTN from './components/Layouts/Nav-BTN';
 import Search from './components/Users/search';
 import Users from './components/Users/Users';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import About from './components/Pages/About';
 
 
 class App extends Component {
 
   // STATE OBJECT
   state = {
-
     users: [],
     laoding: false,
     alert: null
@@ -48,27 +50,44 @@ class App extends Component {
 
     return(
       
+      <Router>
       <div className='App'>
-          <Navbar />
-          <div>
 
-            <Alert alert={alert} />
+        <Navbar />
+        <NavBTN/>
+        <div>
 
-            {/* using props hamne "searchUSers" ke method ko call kiya or uper function banadiya */}
-            <Search searchUsers= {this.searchUsers} 
-
-                clearUsers={this.clearUsers} 
-                // Agr users ki lenght 0 se bari he to true return warna false
-                showClear={users.length > 0 ? true : false}      
-                setAlert={this.setAlert}
-            />
-            
-            {/* hamne state me se objects lekr "users" me call karliya using "props"  */}
-            <Users laoding={laoding} users={users} />
+          <Alert alert={alert} />
           
-          </div>
-      </div>
+          <Routes>
+              {/*1 Home Page Route */}
+              <Route exact path="/" Component={ (props) =>
+                  
+                  <div>
 
+                    {/* using props hamne "searchUSers" ke method ko call kiya or uper function banadiya */}
+                    <Search searchUsers= {this.searchUsers} 
+
+                          clearUsers={this.clearUsers} 
+                          // Agr users ki lenght 0 se bari he to true return warna false
+                          showClear={users.length > 0 ? true : false}      
+                          setAlert={this.setAlert} />
+                
+                    {/* hamne state me se objects lekr "users" me call karliya using "props"  */}
+                    <Users laoding={laoding} users={users} />
+
+                  </div>
+                }/>
+
+              {/*2 About Page Route */}
+              <Route exact path='/about' element={<About/>}/>
+
+          </Routes>
+                  
+        </div>
+
+      </div>
+      </Router>
     )  
   } 
 }

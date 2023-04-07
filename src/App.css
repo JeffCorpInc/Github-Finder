@@ -13,6 +13,12 @@
     border-radius: 40px;
     transition: 0.2s ease-in-out;
 }
+
+.Mheading{
+    margin-left: 17px;
+    font-size: 25px;
+}
+
 .navbar:hover{
     background-color: rgb(253, 220, 180);
 }
@@ -99,4 +105,25 @@ input{
     padding: 6px;
     font-style: italic;
     color: red;
+}
+
+ul{
+    list-style-type: none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+li .one{
+    border-radius: 50px;
+    margin-left: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.contact{
+    position: absolute;
+    top: 28px;
+    right: 35px;
+    font-size: 12px;
 }

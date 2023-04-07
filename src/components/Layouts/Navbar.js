@@ -5,16 +5,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-
 const Navbar = (props) => {
 
   return (
     
     <nav className='navbar'>
 
-      <h1>
+      <h1 className='Mheading'>
         <i className={props.icon}></i> {props.title}
-      </h1>
+      </h1>       
 
     </nav>
   )
