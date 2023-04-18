@@ -1,77 +1,72 @@
 
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import { useState } from 'react';
 
+const Search = (searchUsers, displayAlert, clearUsers, showClear) => {
 
-export default class search extends Component {
-  
-  state = {
-    text: ""
-  }
-
-  static propTypes = {
-    searchUsers: PropTypes.func.isRequired,
-    clearUsers: PropTypes.func.isRequired,
-    showClear: PropTypes.bool.isRequired,
-    setAlert: PropTypes.func.isRequired
-  }
+  const [text, setText] = useState('');
 
   // jab bhi koi value change ho to wo state me update hogae
-  onChange = e => {
-    this.setState({ [ e.target.name ] : e.target.value })
-  }
+  const onChange = e => setText( e.target.value )
 
   // this function will submit the Search form and prevent from loading
-  onSubmit = e => {
+  const onSubmit = e => {
 
     e.preventDefault();
-    if (this.state.text==="") {
-      this.props.setAlert("Please Enter Username" , "light")
+    if (text==="") {
+
+      displayAlert("Please Enter Username" , "light");
     }
 
     else{
-      this.props.searchUsers(this.state.text)
-      this.setState({ text: "" })
+
+      searchUsers(text)
+      setText('');
     }
   } 
 
-  onClick = e => {
-    this.props.clearUsers();
+  const onClick = () => {
+    clearUsers();
   }
 
-  render() {
+  return (
 
-    const { showClear } = this.props;
-    const { text } = this.state;
+    <div>
+      
+      <form className='form' onSubmit={onSubmit}>
 
-    return (
+          <input type="text" name='text' placeholder='Search User' className='btn-search'
+            // Hamne search bar ki value ko state me update karwadiya
+            value={text}
+            onChange={onChange}
+          />
 
-      <div>
-        
-        <form className='form' onSubmit={this.onSubmit}>
+          <input type="submit" value="Search" className='btn-submit' />
 
-            <input type="text" name='text' placeholder='Search User' className='btn-search'
-              // Hamne search bar ki value ko state me update karwadiya
-              value={text}
-              onChange={this.onChange}
-            />
+          {/* condition for showing clear button after search... condition true he idhr */}
+          {showClear && (
 
-            <input type="submit" value="Search" className='btn-submit' />
+            <button onClick={onClick} className="clear-btn">
 
-            {/* condition for showing clear button after search... condition true he idhr */}
-            {showClear && (
+              <i className="fa-solid fa-trash"></i>
 
-              <button onClick={this.onClick} className="clear-btn">
+            </button>
 
-                <i className="fa-solid fa-trash"></i>
+          )}
+          
+      </form>     
 
-              </button>
-
-            )}
-            
-        </form>     
-
-      </div>
-    )
-  }
+    </div>
+  )
+  
 }
+
+Search.propTypes = {
+  searchUsers: PropTypes.func.isRequired,
+  clearUsers: PropTypes.func.isRequired,
+  showClear: PropTypes.bool.isRequired,
+  displayAlert: PropTypes.func.isRequired
+}
+
+export default Search;
