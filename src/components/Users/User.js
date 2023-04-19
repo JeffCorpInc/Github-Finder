@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom';
 import RepoItems from '../Repositories/RepoItems';
 
 
-const User = (match, getUser, getUserRepos, user, laoding, repos) => {
+const User = ({match, getUser, getUserRepos, user, laoding, repos}) => {
 
   useEffect(()=>{
     getUser(match?.params?.login);
     getUserRepos(match?.params?.login);
-  }, [getUser, getUserRepos, match?.params?.login]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   const { avatar_url, location, name, hireable, bio, html_url, company , login, followers, following, public_repos, public_gists, website } = user;
   if (laoding) return <Spinner/>;

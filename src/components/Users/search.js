@@ -1,14 +1,14 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useState } from 'react';
 
-const Search = (searchUsers, displayAlert, clearUsers, showClear) => {
+const Search = ({searchUsers, setAlert, clearUsers, showClear}) => {
 
+  // first value object 2nd method to update object
   const [text, setText] = useState('');
 
   // jab bhi koi value change ho to wo state me update hogae
-  const onChange = e => setText( e.target.value )
+  const onChange = e => setText(e.target.value)
 
   // this function will submit the Search form and prevent from loading
   const onSubmit = e => {
@@ -16,7 +16,7 @@ const Search = (searchUsers, displayAlert, clearUsers, showClear) => {
     e.preventDefault();
     if (text==="") {
 
-      displayAlert("Please Enter Username" , "light");
+      setAlert("Please Enter Username" , "light");
     }
 
     else{
@@ -66,7 +66,7 @@ Search.propTypes = {
   searchUsers: PropTypes.func.isRequired,
   clearUsers: PropTypes.func.isRequired,
   showClear: PropTypes.bool.isRequired,
-  displayAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired
 }
 
 export default Search;
