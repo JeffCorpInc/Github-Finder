@@ -1,13 +1,17 @@
 // here we will fetch the github user data and show them
 
-import React from 'react'
+import React, { useContext } from 'react'
 import UserData from './UserData';
 import Spinner from '../Layouts/spinner';
-import PropTypes  from 'prop-types';
+import GithubContext from '../../Context/github/githubContext';
 
 
 
-const Users = ({users , laoding}) => {
+const Users = () => {
+
+  // Initializing GithubContext using useContext
+  const githubContext = useContext(GithubContext);
+  const {laoding, users} = githubContext;
 
   // check if "loading or not" and return "spinner or userItems"
   if (laoding) {
@@ -33,12 +37,6 @@ const Users = ({users , laoding}) => {
       </div>
     )
   }
-}
-
-Users.propTypes = {
-  
-  users: PropTypes.array.isRequired,
-  laoding: PropTypes.bool.isRequired,
 }
 
 export default Users
