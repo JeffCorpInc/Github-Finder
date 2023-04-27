@@ -4,6 +4,21 @@ import GithubContext from './githubContext';
 import GithubReducer from './githubReducer';
 import {SEARCH_USERS,GET_USER,CLEAR_USERS,GET_REPOS,SET_LAODING} from '../types';
 
+
+let githubClientId;
+let githubClientSecret;
+
+if(process.env.NODE_ENV !== "production"){
+    githubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
+    githubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+}
+else{
+    githubClientId = process.env.GITHUB_CLIENT_ID;
+    githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
+}
+
+
+
 const GithubState = props => {
 
     // all the object from APP.js
@@ -24,7 +39,7 @@ const GithubState = props => {
 
         // "get request" return promise, ".then" to catch promise. Axios fetching data.
         // await keyword is used to not to wait for the api result and run the other code. 
-        const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
+        const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${githubClientId}&client_secret=${githubClientSecret}`)
         
         dispatch({
             type: SEARCH_USERS,
@@ -40,7 +55,7 @@ const GithubState = props => {
     const getUser = async (username) => {
         
         setLaoding();
-        const res = await axios.get(`https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}?client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
+        const res = await axios.get(`https://api.github.com/users/${username}?client_id=${githubClientId}?client_secret=${githubClientSecret}`)
         
         dispatch({
             type: GET_USER,
