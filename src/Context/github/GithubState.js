@@ -40,7 +40,7 @@ const GithubState = props => {
         // "get request" return promise, ".then" to catch promise. Axios fetching data.
         // await keyword is used to not to wait for the api result and run the other code. 
         const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${githubClientId}&client_secret=${githubClientSecret}`)
-        
+        console.log(res);
         dispatch({
             type: SEARCH_USERS,
             // data hoga isme jo state me update kare ga
@@ -55,7 +55,7 @@ const GithubState = props => {
     const getUser = async (username) => {
         
         setLaoding();
-        const res = await axios.get(`https://api.github.com/users/${username}?client_id=${githubClientId}?client_secret=${githubClientSecret}`)
+        const res = await axios.get(`https://api.github.com/users/${username}?client_id=${githubClientId}&client_secret=${githubClientSecret}`)
         
         dispatch({
             type: GET_USER,
@@ -67,16 +67,13 @@ const GithubState = props => {
     const getUserRepos = async (username) => {
     
         setLaoding();
-        const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}?client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
+        const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`)
 
         dispatch({
             type: GET_REPOS,
             payload: res.data
         })
     }
-
-
-
 
     // Set Loading
     const setLaoding = () => dispatch({ type: SET_LAODING })
