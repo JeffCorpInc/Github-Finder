@@ -65,6 +65,7 @@ const GithubState = props => {
             console.log(error.toJSON());
         }
 
+        // main error is in this componenet, Error type: NOT FOUND 404 error
     }
 
     // Get Repos
