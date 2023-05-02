@@ -1,7 +1,6 @@
 // Is component me ham GitHub api ke through user ka data fetch kare ge or App.js pr call kare ge
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 
@@ -19,12 +18,6 @@ const UserData = ({user:{ avatar_url, login }}) => {
 
       </div>
     )
-}
-
-// Type checking active, user is required 
-UserData.propTypes = {
-
-  user: PropTypes.object.isRequired,
 }
 
 export default UserData
